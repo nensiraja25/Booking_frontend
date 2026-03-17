@@ -10,7 +10,7 @@ import CustomText from "../shared/CustomText";
 import { Ionicons } from "@expo/vector-icons";
 import CounterButton from "./CounterButton";
 
-type VehicleType = "Ambulance" | "Fire" | "NGO";
+type VehicleType = "AMBULANCE" | "FIRE_BRIGADE" | "ANIMAL_NGO";
 
 interface RideItem {
     _id: string;

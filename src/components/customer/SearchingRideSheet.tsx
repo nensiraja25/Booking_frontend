@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import { router } from '../../../.expo/types/router';
 import { router } from 'expo-router';
 
-type VehicleType = 'Ambulance' | 'Fire' | 'NGO';
+type VehicleType = "AMBULANCE" | "FIRE_BRIGADE" | "ANIMAL_NGO";
 
 interface RideItem {
     vehicle?: VehicleType;

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
+import { View, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { authStyles } from '@/styles/authStyles'
@@ -9,21 +9,32 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { useWS } from '@/service/WSProvider'
 import CustomButton from '@/components/shared/CustomButton'
 import PhoneInput from '@/components/shared/PhoneInput'
-import { signin } from '@/service/authService'
+import OtpInputModal from '@/components/shared/OtpInputModal'
+import { requestOtp, verifyOtp } from '@/service/authService'
 const Auth = () => {
 
   const {updateAccessToken}=useWS()
   const [phone,setPhone]=useState('')
+  const [otpVisible,setOtpVisible]=useState(false)
+  const [loading,setLoading]=useState(false)
 
 const handleNext=async()=>{
-  if(!phone && phone.length<10){
+  if(!phone || phone.length<10){
     Alert.alert("Invalid phone number","Please enter a valid phone number") 
     return
   } 
-  signin({
-    role:"customer",
-    phone
-  },updateAccessToken)
+  try{
+    setLoading(true)
+    const res = await requestOtp({ role:"customer", phone })
+    if(res?.dev_otp){
+      Alert.alert("Dev OTP", `Your OTP is ${res.dev_otp}`)
+    }
+    setOtpVisible(true)
+  }catch(e:any){
+    Alert.alert("Failed","Could not send OTP. Please try again.")
+  }finally{
+    setLoading(false)
+  }
 }
 
   return (
@@ -52,9 +63,16 @@ const handleNext=async()=>{
         <CustomText variant='h8' fontFamily='Regular' style={[commonStyles.lightText, {textAlign:"center",marginHorizontal:20}]}>
           By continuing, you agree to our Terms of Service and Privacy Policy.
         </CustomText>
-        <CustomButton title='Next' onPress={handleNext} loading={false} disabled={false}/>
+        <CustomButton title='Next' onPress={handleNext} loading={loading} disabled={loading}/>
 
         </View>
+      <OtpInputModal
+        visible={otpVisible}
+        onClose={()=>setOtpVisible(false)}
+        title="Enter OTP"
+        onConfirm={(otp)=>verifyOtp({ role:"customer", phone, code: otp }, updateAccessToken)}
+        length={4}
+      />
     </SafeAreaView>
   )
 }

@@ -6,6 +6,46 @@ import axios from "axios";
 import { Alert } from "react-native";
 import { BASE_URL } from "./config";
 
+export const requestOtp = async (payload: {
+    role: "customer" | "rider" | "admin";
+    phone: string;
+}) => {
+    const res = await axios.post(`${BASE_URL}/auth/request-otp`, payload);
+    return res.data as { message: string; dev_otp?: string; expires_in_seconds: number };
+};
+
+export const verifyOtp = async (
+    payload: {
+        role: "customer" | "rider" | "admin";
+        phone: string;
+        code: string;
+    },
+    updateAccessToken: () => void
+) => {
+    const { setUser } = useUserStore.getState();
+    const { setUser: setRiderUser } = useRiderStore.getState();
+
+    const res = await axios.post(`${BASE_URL}/auth/verify-otp`, payload);
+
+    if (res.data.user.role === "customer" || res.data.user.role === "admin") {
+        setUser(res.data.user);
+    } else {
+        setRiderUser(res.data.user);
+    }
+
+    tokenStorage.set("access_token", res.data.access_token);
+    tokenStorage.set("refresh_token", res.data.refresh_token);
+
+    if (res.data.user.role === "customer") {
+        resetAndNavigate("/customer/home");
+    } else if (res.data.user.role === "rider") {
+        resetAndNavigate("/rider/home");
+    } else {
+        resetAndNavigate("/admin/home");
+    }
+
+    updateAccessToken();
+};
 
 export const signin = async (
     payload:{

@@ -30,7 +30,7 @@ const RideBooking = () => {
     const rideOptions = useMemo(
         () => [
             {
-                type: "Ambulance",
+                type: "AMBULANCE",
                 seats: 1,
                 time: "1 mins",
                 droptime: "4:27 PM",
@@ -39,7 +39,7 @@ const RideBooking = () => {
                 icon: require("@/assets/icons/ambulance.png"),
             },
             {
-                type: "Fire",
+                type: "FIRE_BRIGADE",
                 seats: 3,
                 time: "2 mins",
                 droptime: "4:30 PM",
@@ -48,7 +48,7 @@ const RideBooking = () => {
                 icon: require("@/assets/icons/fire.png"),
             },
             {
-                type: "NGO",
+                type: "ANIMAL_NGO",
                 seats: 4,
                 time: "3 mins",
                 droptime: "4:32 PM",
@@ -69,11 +69,11 @@ const RideBooking = () => {
          
         await createRide({  
          vehicle:  
-         selectedOption === "Ambulance"  
-         ? "Ambulance"  
-         : selectedOption === "Fire"  
-         ? "Fire" 
-         : "NGO",  
+         selectedOption === "AMBULANCE"  
+         ? "AMBULANCE"  
+         : selectedOption === "FIRE_BRIGADE"  
+         ? "FIRE_BRIGADE" 
+         : "ANIMAL_NGO",  
          drop: {  
          latitude: parseFloat(item.drop_latitude),  
          longitude: parseFloat(item.drop_longitude),  
