@@ -11,6 +11,9 @@ const Role  = () => {
   const handleRiderPress = () => {
     router.navigate('./rider/auth');
   }
+  const handleAdminPress = () => {
+    router.navigate('./admin/auth');
+  }
   return (
     <View style={roleStyles.container}>
       <Image source={require('@/assets/images/logo_t.png')} 
@@ -30,6 +33,13 @@ const Role  = () => {
           <View style={roleStyles.cardContent}>
             <CustomText style={roleStyles.title}>Rider</CustomText>
             <CustomText style={roleStyles.description}>Are you a Service Provider?  </CustomText>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={roleStyles.card} onPress={handleAdminPress}>
+          <Image source={require("@/assets/images/customer.jpg")} style={roleStyles.image} />
+          <View style={roleStyles.cardContent}>
+            <CustomText style={roleStyles.title}>Admin</CustomText>
+            <CustomText style={roleStyles.description}>Manage users, providers, and requests</CustomText>
           </View>
         </TouchableOpacity>
     </View>

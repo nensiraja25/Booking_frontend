@@ -8,7 +8,7 @@ import CustomText from '../shared/CustomText';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { resetAndNavigate } from '@/utils/Helpers';
 
-type VehicleType = "Ambulance" | "Fire" | "NGO";
+type VehicleType = "AMBULANCE" | "FIRE_BRIGADE" | "ANIMAL_NGO";
 
 interface RideItem {
     _id: string;

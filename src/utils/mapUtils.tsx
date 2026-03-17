@@ -160,8 +160,8 @@ export const getPoints = (places: any) => {
     return quadraticBezierCurve(p1, p2, controlPoint, 100);
 };
 
-export const vehicleIcons: Record<'Ambulance' | 'Fire' | 'NGO', { icon: any }> = {
-    Ambulance: { icon: require('@/assets/icons/ambulance.png') },
-    Fire: { icon: require('@/assets/icons/fire.png') },
-    NGO: { icon: require('@/assets/icons/ngo.png') },
+export const vehicleIcons: Record<"AMBULANCE" | "FIRE_BRIGADE" | "ANIMAL_NGO", { icon: any }> = {
+    AMBULANCE: { icon: require('@/assets/icons/ambulance.png') },
+    FIRE_BRIGADE: { icon: require('@/assets/icons/fire.png') },
+    ANIMAL_NGO: { icon: require('@/assets/icons/ngo.png') },
 };

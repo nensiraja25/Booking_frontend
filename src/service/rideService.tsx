@@ -10,7 +10,7 @@ interface coords {
 }
 
 export const createRide = async (payload: {
-    vehicle: "Ambulance" | "Fire" | "NGO",
+    vehicle: "AMBULANCE" | "FIRE_BRIGADE" | "ANIMAL_NGO",
     pickup: coords,
     drop: coords,
 }) => {

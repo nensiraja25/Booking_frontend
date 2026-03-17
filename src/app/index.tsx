@@ -10,9 +10,11 @@ import {jwtDecode} from 'jwt-decode';
 import { resetAndNavigate } from '@/utils/Helpers'
 import { refresh_tokens } from '@/service/apiInterceptor'
 import { logout } from '@/service/authService'
+import Constants from "expo-constants";
 
 interface decodedToken { 
   exp: number;
+  role?: "customer" | "rider" | "admin";
 }
 
 const Main = () => {
@@ -52,16 +54,25 @@ const Main = () => {
         }
       }
 
-      if(user){
-        resetAndNavigate('./customer/home');
-      }
-      else{
-        resetAndNavigate('./rider/home');
+      const decoded = jwtDecode<decodedToken>(access_token);
+      if (decoded?.role === "admin") {
+        resetAndNavigate("./admin/home");
+      } else if (decoded?.role === "customer") {
+        resetAndNavigate("./customer/home");
+      } else {
+        resetAndNavigate("./rider/home");
       }
       return;
     }
 
-    resetAndNavigate('/role');
+    const defaultRole =
+      (Constants.expoConfig?.extra as any)?.EXPO_PUBLIC_DEFAULT_ROLE ||
+      (process.env.EXPO_PUBLIC_DEFAULT_ROLE as any);
+
+    if (defaultRole === "customer") resetAndNavigate("/customer/auth");
+    else if (defaultRole === "rider") resetAndNavigate("/rider/auth");
+    else if (defaultRole === "admin") resetAndNavigate("/admin/auth");
+    else resetAndNavigate("/role");
   }
 
   useEffect(() => {

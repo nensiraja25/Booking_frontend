@@ -9,6 +9,10 @@ const Layout = () => {
     <Stack screenOptions={{headerShown:false}}>
          <Stack.Screen name='index' />
          <Stack.Screen name='role' />
+         <Stack.Screen name='admin/auth' />
+         <Stack.Screen name='admin/home' />
+         <Stack.Screen name='admin/users' />
+         <Stack.Screen name='admin/rides' />
          <Stack.Screen name='customer/selectlocations' />
          <Stack.Screen name='customer/ridebooking' />
          <Stack.Screen name='customer/home' />

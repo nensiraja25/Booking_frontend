@@ -8,6 +8,9 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "web:customer": "EXPO_PUBLIC_DEFAULT_ROLE=customer expo start --web --port 19006",
+    "web:rider": "EXPO_PUBLIC_DEFAULT_ROLE=rider expo start --web --port 19007",
+    "web:admin": "EXPO_PUBLIC_DEFAULT_ROLE=admin expo start --web --port 19008",
     "lint": "expo lint"
   },
   "dependencies": {
