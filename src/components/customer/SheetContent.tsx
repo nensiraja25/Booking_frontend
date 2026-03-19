@@ -6,6 +6,7 @@ import { router } from "expo-router";
 import { RFValue } from "react-native-responsive-fontsize";
 import CustomText from "../shared/CustomText";
 import { commonStyles } from "@/styles/commonStyles";
+import CustomButton from "../shared/CustomButton";
 
 const cubes = [
     { name: "Ambulance", imageUri: require("@/assets/icons/ambulance.png") },
@@ -59,6 +60,15 @@ const SheetContent = () => {
             </View>
             <View style={uiStyles.bannerContainer}>
                 <Image source={require("@/assets/icons/footer.jpeg")} style={uiStyles.banner} />
+            </View>
+
+            <View style={{ marginTop: 10 }}>
+                <CustomButton
+                    title="Send Feedback"
+                    onPress={() => router.navigate("/customer/feedback")}
+                    disabled={false}
+                    loading={false}
+                />
             </View>
 
         </View>
