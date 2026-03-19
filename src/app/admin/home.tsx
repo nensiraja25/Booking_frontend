@@ -35,6 +35,15 @@ const AdminHome = () => {
           Users: {stats?.users ?? "-"}
         </CustomText>
         <CustomText fontFamily="Medium">
+          Pending registrations: {stats?.pendingRegistrations ?? "-"}
+        </CustomText>
+        <CustomText fontFamily="Medium">
+          Categories: {stats?.categories ?? "-"}
+        </CustomText>
+        <CustomText fontFamily="Medium">
+          Open feedback: {stats?.openFeedback ?? "-"}
+        </CustomText>
+        <CustomText fontFamily="Medium">
           Requests - searching: {stats?.rides?.searching ?? "-"}
         </CustomText>
         <CustomText fontFamily="Medium">
@@ -47,8 +56,12 @@ const AdminHome = () => {
 
       <View style={{ marginTop: 24, gap: 12 }}>
         <CustomButton title="Refresh" onPress={load} disabled={false} loading={false} />
-        <CustomButton title="View Users" onPress={() => router.push("/admin/users")} disabled={false} loading={false} />
-        <CustomButton title="View Requests" onPress={() => router.push("/admin/rides")} disabled={false} loading={false} />
+        <CustomButton title="Manage Categories" onPress={() => router.push("/admin/categories")} disabled={false} loading={false} />
+        <CustomButton title="Manage Registrations" onPress={() => router.push("/admin/registrations")} disabled={false} loading={false} />
+        <CustomButton title="Manage Services (Requests)" onPress={() => router.push("/admin/rides")} disabled={false} loading={false} />
+        <CustomButton title="Review Feedback" onPress={() => router.push("/admin/feedback")} disabled={false} loading={false} />
+        <CustomButton title="Reports & Diagrams" onPress={() => router.push("/admin/reports")} disabled={false} loading={false} />
+        <CustomButton title="Users" onPress={() => router.push("/admin/users")} disabled={false} loading={false} />
         <CustomButton
           title="Logout"
           onPress={() => logout(disconnect)}
